@@ -112,6 +112,5 @@ if selected_airport is not None:
         # ... sonuçlar gösterildikten sonra
         st.markdown("### ✨ Yatı süren hazır! ✈️")
         
-        # Eğer yerel bir GIF kullanıyorsan:
-        gif = Image.open("RestPlanner/tenor.gif")
+
         st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_container_width=True)
