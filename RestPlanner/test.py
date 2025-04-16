@@ -95,10 +95,13 @@ if selected_airport is not None:
             sunrise = s["sunrise"]
             sunset = s["sunset"]
 
-            if sunrise <= local_arrival <= sunset:
-                st.info(f"🌞 Varışta gündüz! (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
+            if sunrise is not None and sunset is not None:
+                if sunrise <= local_arrival <= sunset:
+                    st.info(f"🌞 Varışta gündüz! (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
+                else:
+                    st.info(f"🌙 Varışta gece. (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
             else:
-                st.info(f"🌙 Varışta gece. (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
+                st.warning("Gündüz/gece verisi bulunamadı.")
 
         except Exception as e:
             st.error(f"Hata oluştu: {e}")
