@@ -23,37 +23,40 @@ def load_airports():
 
 airports = load_airports()
 
-# Havalimanı arama
-query = st.text_input("Havalimanı Ara (Kod / Şehir / Ad)", max_chars=30).upper()
-
 selected_airport = None
 airport_lat, airport_lon = None, None
 
-if len(query) >= 2:
-    matches = airports[
-        airports["iata_code"].str.contains(query, na=False) |
-        airports["municipality"].str.upper().str.contains(query, na=False) |
-        airports["name"].str.upper().str.contains(query, na=False)
-    ]
+# Havalimanı arama inputunu al
+query = st.text_input("Havalimanı Ara (Kod / Şehir / Ad)", max_chars=30).upper()
 
-    options = [
-        f"{row['iata_code']} - {row['municipality']} ({row['name']})"
-        for _, row in matches.iterrows()
-    ]
+# Havalimanı arama için boşluk yoksa işlemi başlat
+if query:
+    # 1. Havaalanı koduna göre arama
+    airport_row = airports[airports['iata_code'] == query]
 
-    if options:
-        selected_option = st.selectbox("Havalimanını Seç", options)
-        selected_airport = selected_option.split(" - ")[0]
-        selected_row = matches[matches["iata_code"] == selected_airport].iloc[0]
-        coord_str = selected_row["coordinates"]  # örnek: "-73.7781, 40.6413"
-        longitude_str, latitude_str = coord_str.split(", ")
-        airport_lat = float(latitude_str)
-        airport_lon = float(longitude_str)
-
+    # 2. Şehir adına veya havaalanı adına göre arama
+    if airport_row.empty:
+        airport_row = airports[airports['municipality'].str.upper().str.contains(query)]
+    
+    if airport_row.empty:
+        airport_row = airports[airports['name'].str.upper().str.contains(query)]
+    
+    # Havaalanı bulunduysa
+    if not airport_row.empty:
+        selected_airport = airport_row.iloc[0]
+        st.write(f"**Seçilen Havaalanı:** {query}")
+        st.write(f"**İsim:** {selected_airport['name']}")
+        st.write(f"**Ülke:** {selected_airport['iso_country']}")
+        st.write(f"**Koordinatlar:** {selected_airport['coordinates']}")
+        # Latitude ve Longitude'u almak
+        coords = selected_airport['coordinates'].split(", ")
+        airport_lon = float(coords[0])
+        airport_lat = float(coords[1])
+        st.write(f"**Enlem:** {airport_lat}, **Boylam:** {airport_lon}")
+        
     else:
-        st.warning("Eşleşen havalimanı bulunamadı.")
-else:
-    st.info("Lütfen en az 2 harf girin.")
+        # Geçersiz giriş için hata mesajı
+        st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
 
 # Zaman seçimi
 if selected_airport:
@@ -92,7 +95,7 @@ if selected_airport:
             st.success(f"🕰️ Toplam Kalış Süresi: {int(hours)} saat {int(minutes)} dakika")
 
             # Gündüz/gece kontrolü (Astral)
-            city = LocationInfo(name=selected_airport, region="", timezone=tz_name,
+            city = LocationInfo(name=selected_airport['name'], region="", timezone=tz_name,
                                 latitude=airport_lat, longitude=airport_lon)
             s = sun(city.observer, date=local_arrival.date(), tzinfo=local_tz)
             sunrise = s["sunrise"]
@@ -106,16 +109,12 @@ if selected_airport:
         except Exception as e:
             st.error(f"Hata oluştu: {e}")
 
-
-
-
-
-            # ... sonuçlar gösterildikten sonra
-            st.markdown("### ✨ Yatı süren hazır! ✈️")
+        # ... sonuçlar gösterildikten sonra
+        st.markdown("### ✨ Yatı süren hazır! ✈️")
             
-            # Eğer yerel bir GIF kullanıyorsan:
-            gif = Image.open("RestPlanner/tenor.gif")
-            st.image(gif, caption="Güvenli uçuşlar ❤️", use_column_width=True)
+        # Eğer yerel bir GIF kullanıyorsan:
+        gif = Image.open("RestPlanner/tenor.gif")
+        st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_column_width=True)
 
 
 
