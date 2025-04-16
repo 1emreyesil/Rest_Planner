@@ -47,13 +47,7 @@ if query:
         st.write(f"**Seçilen Havaalanı:** {query}")
         st.write(f"**İsim:** {selected_airport['name']}")
         st.write(f"**Ülke:** {selected_airport['iso_country']}")
-        st.write(f"**Koordinatlar:** {selected_airport['coordinates']}")
-        # Latitude ve Longitude'u almak
-        coords = selected_airport['coordinates'].split(", ")
-        airport_lon = float(coords[0])
-        airport_lat = float(coords[1])
-        st.write(f"**Enlem:** {airport_lat}, **Boylam:** {airport_lon}")
-        
+
     else:
         # Geçersiz giriş için hata mesajı
         st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
