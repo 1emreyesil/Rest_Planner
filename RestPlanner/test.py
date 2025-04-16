@@ -16,7 +16,7 @@ st.caption("Varış & Dönüş zamanına göre kalış süresi ve gündüz/gece 
 # Havalimanı veritabanı
 @st.cache_data
 def load_airports():
-    df = pd.read_csv(r"D:\İndirilenler\python\RestPlanner\airport-codes.csv")
+    df = pd.read_csv("RestPlanner/airport-codes.csv")
     return df[df["iata_code"].notna()]
 
 airports = load_airports()
