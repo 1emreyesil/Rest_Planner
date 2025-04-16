@@ -110,17 +110,14 @@ if selected_airport:
 
 
 
-# ... sonuçlar gösterildikten sonra
-st.markdown("### ✨ Yatı süren hazır! ✈️")
+            # ... sonuçlar gösterildikten sonra
+            st.markdown("### ✨ Yatı süren hazır! ✈️")
+            
+            # Eğer yerel bir GIF kullanıyorsan:
+            gif = Image.open("RestPlanner/tenor.gif")
+            st.image(gif, caption="Güvenli uçuşlar ❤️", use_column_width=True)
 
-# Eğer yerel bir GIF kullanıyorsan:
-gif = Image.open("RestPlanner/tenor.gif")
-st.image(gif, caption="Güvenli uçuşlar ❤️", use_column_width=True)
 
-# Veya Giphy üzerinden bir URL:
-st.image("https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif", 
-         caption="Uçuş planın hazır, iyi yolculuklar! 🧳", 
-         use_column_width=True)
 
 
 # %%
