@@ -59,7 +59,7 @@ if query:
         st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
 
 # Zaman seçimi
-if selected_airport:
+if selected_airport is not None:
     st.markdown("### 🕓 Varış & Dönüş Bilgileri (GMT+0)")
 
     col1, col2 = st.columns(2)
@@ -108,10 +108,10 @@ if selected_airport:
 
         except Exception as e:
             st.error(f"Hata oluştu: {e}")
-
+            
         # ... sonuçlar gösterildikten sonra
         st.markdown("### ✨ Yatı süren hazır! ✈️")
-            
+        
         # Eğer yerel bir GIF kullanıyorsan:
         gif = Image.open("RestPlanner/tenor.gif")
         st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_column_width=True)
