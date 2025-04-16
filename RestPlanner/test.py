@@ -1,4 +1,3 @@
-# %%
 import streamlit as st
 import pandas as pd
 from datetime import datetime, time
@@ -48,6 +47,11 @@ if query:
         st.write(f"**İsim:** {selected_airport['name']}")
         st.write(f"**Ülke:** {selected_airport['iso_country']}")
 
+        # Koordinatlar
+        coords = selected_airport['coordinates'].split(", ")
+        airport_lat = float(coords[1])  # Enlem
+        airport_lon = float(coords[0])  # Boylam
+        st.write(f"**Enlem:** {airport_lat}, **Boylam:** {airport_lon}")
     else:
         # Geçersiz giriş için hata mesajı
         st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
@@ -111,12 +115,4 @@ if selected_airport is not None:
         
         # Eğer yerel bir GIF kullanıyorsan:
         gif = Image.open("RestPlanner/tenor.gif")
-        st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_column_width=True)
-
-
-
-
-# %%
-
-
-
+        st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_container_width=True)
