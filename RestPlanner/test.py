@@ -51,7 +51,6 @@ if query:
         coords = selected_airport['coordinates'].split(", ")
         airport_lat = float(coords[1])  # Enlem
         airport_lon = float(coords[0])  # Boylam
-        st.write(f"**Enlem:** {airport_lat}, **Boylam:** {airport_lon}")
     else:
         # Geçersiz giriş için hata mesajı
         st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
@@ -92,9 +91,7 @@ if selected_airport is not None:
             
             # ... sonuçlar gösterildikten sonra
             st.markdown("### ✨ Yatı süren hazır! ✈️")
-            # Eğer yerel bir GIF kullanıyorsan:
-            gif = Image.open("RestPlanner/tenor.gif")
-            st.success(f"🕰️ Toplam Kalış Süresi: {int(hours)} saat {int(minutes)} dakika")
+
 
             # Gündüz/gece kontrolü (Astral)
             city = LocationInfo(name=selected_airport['name'], region="", timezone=tz_name,
