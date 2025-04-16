@@ -7,6 +7,8 @@ from pytz import timezone, utc
 from astral.sun import sun
 from astral import LocationInfo
 import pytz
+from PIL import Image
+
 
 # Başlık
 st.set_page_config(page_title="Kabin Memuru Zaman Planlayıcısı", page_icon="🛫")
@@ -103,6 +105,23 @@ if selected_airport:
 
         except Exception as e:
             st.error(f"Hata oluştu: {e}")
+
+
+
+
+
+# ... sonuçlar gösterildikten sonra
+st.markdown("### ✨ Yatı süren hazır! ✈️")
+
+# Eğer yerel bir GIF kullanıyorsan:
+gif = Image.open("RestPlanner/tenor.gif")
+st.image(gif, caption="Güvenli uçuşlar ❤️", use_column_width=True)
+
+# Veya Giphy üzerinden bir URL:
+st.image("https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif", 
+         caption="Uçuş planın hazır, iyi yolculuklar! 🧳", 
+         use_column_width=True)
+
 
 # %%
 
