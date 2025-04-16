@@ -88,9 +88,8 @@ if selected_airport is not None:
             duration = local_departure - local_arrival
             hours = duration.total_seconds() // 3600
             minutes = (duration.total_seconds() % 3600) // 60
-            
-            # ... sonuçlar gösterildikten sonra
-            st.markdown("### ✨ Yatı süren hazır! ✈️")
+
+            st.success(f"🕰️ Toplam Kalış Süresi: {int(hours)} saat {int(minutes)} dakika")
 
             # Gündüz/gece kontrolü (Astral)
             city = LocationInfo(name=selected_airport['name'], region="", timezone=tz_name,
@@ -99,7 +98,7 @@ if selected_airport is not None:
             sunrise = s["sunrise"]
             sunset = s["sunset"]
 
-            if sunrise and sunset:
+            if sunrise is not None and sunset is not None:
                 if sunrise <= local_arrival <= sunset:
                     st.info(f"🌞 Varışta gündüz! (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
                 else:
@@ -109,8 +108,10 @@ if selected_airport is not None:
 
         except Exception as e:
             st.error(f"Hata oluştu: {e}")
+            
+        # ... sonuçlar gösterildikten sonra
+        st.markdown("### ✨ Yatı süren hazır! ✈️")
         
-        # Yerel bir GIF kullanıyorsan:
+        # Eğer yerel bir GIF kullanıyorsan:
         gif = Image.open("RestPlanner/tenor.gif")
         st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_container_width=True)
-
