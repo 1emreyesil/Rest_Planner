@@ -113,4 +113,4 @@ if selected_airport is not None:
         st.markdown("### ✨ Yatı süren hazır! ✈️")
         
 
-        st.image(gif, caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_container_width=True)
+        st.image( caption="Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️", use_container_width=True)
