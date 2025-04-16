@@ -43,8 +43,11 @@ if len(query) >= 2:
         selected_option = st.selectbox("Havalimanını Seç", options)
         selected_airport = selected_option.split(" - ")[0]
         selected_row = matches[matches["iata_code"] == selected_airport].iloc[0]
-        airport_lat = selected_row["latitude_deg"]
-        airport_lon = selected_row["longitude_deg"]
+        coord_str = selected_row["coordinates"]  # örnek: "-73.7781, 40.6413"
+        longitude_str, latitude_str = coord_str.split(", ")
+        airport_lat = float(latitude_str)
+        airport_lon = float(longitude_str)
+
     else:
         st.warning("Eşleşen havalimanı bulunamadı.")
 else:
