@@ -10,7 +10,7 @@ from PIL import Image
 
 
 # Başlık
-st.set_page_config(page_title="Kabin Memuru Zaman Planlayıcısıı", page_icon="🛫")
+st.set_page_config(page_title="Esma'nın yatısı ne kadar? ", page_icon="🛫")
 st.title("🛬 Kabin Memuru Zaman Planlayıcısı")
 st.caption("Varış & Dönüş zamanına göre kalış süresi ve gündüz/gece hesaplaması")
 
@@ -44,8 +44,8 @@ if query:
         airport_lon = float(coords[0])  # Boylam
     else:
         # Hatalı kod girildiğinde gif + uyarı
-        st.error("Hatalı havaalanı kodu girdiniz. Lütfen geçerli bir IATA kodu yazın! 🛑")
-        st.image("https://tenor.com/en-GB/view/sleepy-korean-andherson-luiza-baby-gif-19429824", width=300)
+        st.error("Hatalı havaalanı kodu girdin birtanem. Lütfen geçerli bir IATA kodu yazın! 🛑")
+        st.image("https://tenor.com/bdpjr.gif", width=300)
 
 
 # Zaman seçimi
