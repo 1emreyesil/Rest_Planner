@@ -9,12 +9,12 @@ import pytz
 from PIL import Image
 
 
-# Başlık
+# Header
 st.set_page_config(page_title="Esma'nın yatısı ne kadar? ", page_icon="🛫")
 st.title("🛬 Kabin Memuru Zaman Planlayıcısı")
 st.caption("Varış & Dönüş zamanına göre kalış süresi ve gündüz/gece hesaplaması")
 
-# Havalimanı veritabanı
+# Airport Dataset
 @st.cache_data
 def load_airports():
     df = pd.read_csv("RestPlanner/airport-codes.csv")
@@ -25,11 +25,11 @@ airports = load_airports()
 selected_airport = None
 airport_lat, airport_lon = None, None
 
-# Havalimanı arama inputunu al
+# Input for airtport searching
 query = st.text_input("Havalimanı Kodunu Gir (örn: IST, JFK)", max_chars=10).upper()
 
 if query:
-    # Sadece IATA koduna göre arama
+    # Search wwith only IATA Code
     airport_row = airports[airports['iata_code'] == query]
 
     if not airport_row.empty:
@@ -38,7 +38,7 @@ if query:
         st.write(f"**İsim:** {selected_airport['name']}")
         st.write(f"**Ülke:** {selected_airport['iso_country']}")
 
-        # Koordinatlar
+        # Coords
         coords = selected_airport['coordinates'].split(", ")
         airport_lat = float(coords[1])  # Enlem
         airport_lon = float(coords[0])  # Boylam
@@ -48,7 +48,7 @@ if query:
         st.image("https://media1.tenor.com/m/QQSmZAKIu4cAAAAd/korean-baby-scratch-head.gif", width=300)
 
 
-# Zaman seçimi
+# Time Selection
 if selected_airport is not None:
     st.markdown("### 🕓 Varış & Dönüş Bilgileri (GMT+0)")
 
@@ -108,4 +108,4 @@ if selected_airport is not None:
         
 
         st.caption("Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️")
-        st.image("https://tenor.com/en-GB/view/hello-hi-wave-gif-10781513", width=300)
+        st.image("https://media1.tenor.com/m/estHtymljV0AAAAd/hello-hi.gif", width=300)
