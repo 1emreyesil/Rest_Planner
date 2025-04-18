@@ -95,9 +95,9 @@ if selected_airport is not None:
 
             if sunrise is not None and sunset is not None:
                 if sunrise <= local_arrival <= sunset:
-                    st.info(f"🌞 Varışta gündüz! (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
+                    st.info(f"🌞 Varışta gündüz! (Gün Doğumu&Batışı: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
                 else:
-                    st.info(f"🌙 Varışta gece. (Güneş: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
+                    st.info(f"🌙 Varışta gece. (Gün Doğumu&Batışı: {sunrise.strftime('%H:%M')} - {sunset.strftime('%H:%M')})")
             else:
                 st.warning("Gündüz/gece verisi bulunamadı.")
 
