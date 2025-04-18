@@ -45,7 +45,7 @@ if query:
     else:
         # Hatalı kod girildiğinde gif + uyarı
         st.error("Hatalı havaalanı kodu girdin birtanem. Lütfen geçerli bir IATA kodu yazın! 🛑")
-        st.image("https://tenor.com/bdpjr.gif", width=300)
+        st.image("https://media1.tenor.com/m/QQSmZAKIu4cAAAAd/korean-baby-scratch-head.gif", width=300)
 
 
 # Zaman seçimi
