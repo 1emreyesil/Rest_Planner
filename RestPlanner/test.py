@@ -26,21 +26,12 @@ selected_airport = None
 airport_lat, airport_lon = None, None
 
 # Havalimanı arama inputunu al
-query = st.text_input("Havalimanı Ara (Kod / Şehir / Ad)", max_chars=30).upper()
+query = st.text_input("Havalimanı Kodunu Gir (örn: IST, JFK)", max_chars=10).upper()
 
-# Havalimanı arama için boşluk yoksa işlemi başlat
 if query:
-    # 1. Havaalanı koduna göre arama
+    # Sadece IATA koduna göre arama
     airport_row = airports[airports['iata_code'] == query]
 
-    # 2. Şehir adına veya havaalanı adına göre arama
-    if airport_row.empty:
-        airport_row = airports[airports['municipality'].str.upper().str.contains(query)]
-    
-    if airport_row.empty:
-        airport_row = airports[airports['name'].str.upper().str.contains(query)]
-    
-    # Havaalanı bulunduysa
     if not airport_row.empty:
         selected_airport = airport_row.iloc[0]
         st.write(f"**Seçilen Havaalanı:** {query}")
@@ -52,8 +43,10 @@ if query:
         airport_lat = float(coords[1])  # Enlem
         airport_lon = float(coords[0])  # Boylam
     else:
-        # Geçersiz giriş için hata mesajı
-        st.error("Geçersiz havaalanı kodu veya şehir adı! Lütfen geçerli bir kod veya şehir girin.")
+        # Hatalı kod girildiğinde gif + uyarı
+        st.error("Hatalı havaalanı kodu girdiniz. Lütfen geçerli bir IATA kodu yazın! 🛑")
+        st.image("https://tenor.com/en-GB/view/sleepy-korean-andherson-luiza-baby-gif-19429824", width=300)
+
 
 # Zaman seçimi
 if selected_airport is not None:
@@ -115,3 +108,4 @@ if selected_airport is not None:
         
 
         st.caption("Şimdiden iyi istirhatler sevgilim, kendine iyi bak❤️")
+        st.image("https://tenor.com/en-GB/view/hello-hi-wave-gif-10781513", width=300)
