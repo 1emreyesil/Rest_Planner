@@ -10,7 +10,7 @@ from PIL import Image
 
 
 # Başlık
-st.set_page_config(page_title="Kabin Memuru Zaman Planlayıcısı", page_icon="🛫")
+st.set_page_config(page_title="Kabin Memuru Zaman Planlayıcısıı", page_icon="🛫")
 st.title("🛬 Kabin Memuru Zaman Planlayıcısı")
 st.caption("Varış & Dönüş zamanına göre kalış süresi ve gündüz/gece hesaplaması")
 
