@@ -12,6 +12,9 @@ from PIL import Image
 # Header
 st.set_page_config(page_title="🛬 Yatı Süresi Hesaplama?")
 
+# Displaying the welcoming message
+st.markdown("### Hoş geldin sevgilim 💖")  # Sweet and warm greeting
+
 # Creating two columns to display GIFs side by side with some space
 col1, col2 = st.columns([1, 1])  # Adjust the ratio for space between the GIFs
 
@@ -21,11 +24,8 @@ with col1:
 with col2:
     st.image("https://media1.tenor.com/m/NJMkAoGOGrkAAAAd/rohee.gif", width=300)
 
-# Displaying the welcoming message
-st.markdown("### Hoş geldin sevgilim 💖")  # Sweet and warm greeting
 
-# Title of the page
-st.title("Esma'nın yatısı ne kadar? 🤔")
+
 
 
 # Definition
