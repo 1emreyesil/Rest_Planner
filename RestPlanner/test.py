@@ -10,7 +10,7 @@ from PIL import Image
 
 
 # Header
-st.set_page_config(page_title="🛬 Yatı Süresi Hesaplama?", page_icon="🛫")
+st.set_page_config(page_title="🛬 Yatı Süresi Hesaplama?")
 
 # Creating two columns to display GIFs side by side with some space
 col1, col2 = st.columns([1, 1])  # Adjust the ratio for space between the GIFs
